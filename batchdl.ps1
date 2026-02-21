@@ -1,19 +1,32 @@
  [CmdletBinding(DefaultParameterSetName='Encode')]
 
 param (
-  [string]$bf
-  [string]$d
-  [switch]$help
-  [switch]$s
+  [string]$bf,
+  [string]$d,
+  [switch]$h,
+  [switch]$s,
   [switch]$m
 )
 
-if ($help) {
-
+if ($h) {
+   write-host ""
+   write-host "***************************************************************"
+   write-host "usage: batchdl [-sm] [-d target_directory] [-bf batchfile]"
+   write-host ""
+   write-host "s(ound) to chime when done!"
+   write-host "m(p3) to save as audio!"
+   write-host "***************************************************************"
+   write-host ""
 } else {
 try {
   if (-not $bf) {
     $urls = @()
+
+    if ($m) {
+	write-host "*** SAVING AS MP3 ***" -backgroundcolor "Blue"
+    } else {
+	write-host "*** SAVING AS VIDEO ***" -backgroundcolor "Blue"
+    }
 
     while ($true) {
       write-host "Input URLs... (press ENTER to end)" -backgroundcolor "Blue"
