@@ -5,6 +5,7 @@ param (
   [string]$d
   [switch]$help
   [switch]$s
+  [switch]$m
 )
 
 if ($help) {
@@ -24,7 +25,11 @@ try {
     write-host "Processing..." -backgroundcolor "Magenta"
 
     foreach ($url in $urls) {
-      yt-dlp $url
+      if ($m) {
+       yt-dlp -x --audio-format mp3 --audio-quality 0 --no-playlist $url
+      } else {
+       yt-dlp $url
+      }
     }
   }
   else {
